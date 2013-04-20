@@ -25,5 +25,6 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, Visualisation.class);
         
         startActivity(intent);
+        finish();
     }
 }
