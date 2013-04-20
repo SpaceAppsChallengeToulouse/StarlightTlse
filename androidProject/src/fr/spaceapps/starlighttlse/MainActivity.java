@@ -1,7 +1,8 @@
 package fr.spaceapps.starlighttlse;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -10,6 +11,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startVisualisationActivity();
     }
 
 
@@ -19,5 +21,9 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
+    private void startVisualisationActivity() {
+    	Intent intent = new Intent(this, Visualisation.class);
+        
+        startActivity(intent);
+    }
 }
