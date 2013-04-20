@@ -8,17 +8,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Visualisation extends Activity {
+public class Visualisation extends AntiRajaActivity {
 
+	private Renderer mRenderer;
+	
 	private final static String TAG = "Visualisation";
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_visualisation);
-		
-		Button menubutton = (Button)findViewById(R.id.menuButton);
-		menubutton.setOnClickListener(new MenuOnClickListener());
+	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mRenderer = new Renderer(this);
+        mRenderer.setSurfaceView(mSurfaceView);
+        super.setRenderer(mRenderer);
 	}
 
 	@Override
@@ -28,13 +29,6 @@ public class Visualisation extends Activity {
 		return true;
 	}
 	
-	private class MenuOnClickListener implements OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			Log.d(TAG, "Menu button had been clicked");
-		}
-		
-	}
+	
 
 }
