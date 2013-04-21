@@ -11,6 +11,7 @@ public class Star {
 	private float [] rightAscention;
 	private float [] declinaison;
 	private ArrayList<Planet> plan;
+	private float x,y,z;
 	 
 	public Star (){
 		 
@@ -79,5 +80,31 @@ public class Star {
 	public void setPlan(ArrayList<Planet> plan) {
 		this.plan = plan;
 	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
+	}
+	
+	
 	
 }

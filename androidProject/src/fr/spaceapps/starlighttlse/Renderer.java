@@ -1,9 +1,15 @@
 package fr.spaceapps.starlighttlse;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import fr.spaceapps.starlighttlse.beans.Planet;
+import fr.spaceapps.starlighttlse.beans.Star;
 
 import rajawali.BaseObject3D;
 import rajawali.Camera;
@@ -27,6 +33,10 @@ public class Renderer extends RajawaliRenderer {
 	private BaseObject3D mSphere;
 	private BaseObject3D mMoon;
 	private PointLight mSunLight;
+	
+	private List<Star> universe;
+	
+	private List<BaseObject3D> mStars,mPlanets;
 
 	public Renderer(Context context) {
 		super(context);
@@ -34,6 +44,7 @@ public class Renderer extends RajawaliRenderer {
 	}
 
 	protected void initScene() {
+		loadUniverse();
 		mLight = new DirectionalLight(1f, 0.2f, -1.0f); // set the direction
 		mLight.setColor(1.0f, 1.0f, 1.0f);
 		mLight.setPower(2);
@@ -52,9 +63,11 @@ public class Renderer extends RajawaliRenderer {
 		
 		addChild(mSphere);
 		addChild(mMoon);
-		
 		Line3D line = getCircle(earthCenter, earthCenter, 1.5, 75, 1, 0xffffff00);
 		addChild(line);
+		
+
+		initRenderuniverse();
 		
 		mCamera.setZ(4.2f);
 		mCamera.setY(2.0f);
@@ -124,6 +137,56 @@ public class Renderer extends RajawaliRenderer {
 		return sphere;
 	}
 	
+	private void loadUniverse(){
+		universe = new ArrayList<Star>();
+		
+		Planet planet1,planet2,planet3; 
+		
+		Star star1,star2;
+		
+		planet1 = new Planet();
+		planet1.setX(-133.110709072558f);
+		planet1.setY(168.755371357685f);
+		planet1.setZ(-29.104238134762f);
+		
+		planet2 = new Planet();
+		planet2.setX(-135.110709072558f);
+		planet2.setY(168.755371357685f);
+		planet2.setZ(-29.104238134762f);
+		
+		star1 = new Star();
+		star1.setX(-138.110709072558f);
+		star1.setY(168.755371357685f);
+		star1.setZ(-29.104238134762f);
+		star1.setPlan(new ArrayList<Planet>());
+		star1.getPlan().add(planet1);
+		star1.getPlan().add(planet2);
+		
+		universe.add(star1);
+		mStars = new ArrayList<BaseObject3D>();
+		mPlanets = new ArrayList<BaseObject3D>();
+}
+	
+	
+	private void initRenderuniverse(){
+		for(Star aStar : universe){
+
+			Number3D starCenter = new Number3D(aStar.getX(), aStar.getY(), aStar.getZ());
+			BaseObject3D starObj = getSphere(starCenter, 1, 20, R.drawable.sun);
+			addChild(starObj);
+			
+			
+			for(Planet aPlanet : aStar.getPlan()){
+				Number3D planetCenter = new Number3D(aPlanet.getX(), aPlanet.getY(), aPlanet.getZ());
+				BaseObject3D planetObj  = getSphere(planetCenter, 0.125f, 20, R.drawable.earthmap_nasa);
+				
+				addChild(planetObj);
+				
+				Line3D line = getCircle(starCenter, starCenter, planetCenter.x-starCenter.x, 75, 1, 0xffffff00);
+				addChild(line);
+			}
+		}
+	}
 	
 	public Camera getCamera(){
 		return mCamera;

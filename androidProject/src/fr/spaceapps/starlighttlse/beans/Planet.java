@@ -11,6 +11,7 @@ public class Planet {
 	private float period;
 	private float semiAxis;
 	private float inclinaison;
+	private float x,y,z;
 	
 	public Planet(){
 		
@@ -79,5 +80,31 @@ public class Planet {
 	public void setInclinaison(float inclinaison) {
 		this.inclinaison = inclinaison;
 	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
+	}
+	
+	
 	
 }
