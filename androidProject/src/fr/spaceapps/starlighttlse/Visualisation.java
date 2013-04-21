@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 
@@ -46,7 +46,7 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 		mLayout.addView(inflate);
 
 
-		Button btn = (Button)findViewById(R.id.menuButton);
+		ImageButton btn = (ImageButton)findViewById(R.id.menuButton);
 		btn.setOnClickListener(new OnClickListener(){
 
 			@Override

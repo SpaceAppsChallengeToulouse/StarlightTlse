@@ -19,12 +19,17 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" /> -->
 
-    <Button
-        android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/menu_button" />
+            android:background="#0000"
+            android:contentDescription="@string/menu_button"
+            android:onClick="startOptions"
+            android:paddingBottom="25dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/btn_par_drawable" />
 
 </RelativeLayout>

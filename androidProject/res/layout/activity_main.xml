@@ -31,28 +31,38 @@
             android:onClick="startGame"
             android:paddingBottom="25dp"
             android:scaleType="centerInside"
-            android:src="@drawable/btn" />
+            android:src="@drawable/btn_play_drawable" />
 
         <ImageButton
             android:id="@+id/imageButtonOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#0000"
             android:contentDescription="@string/app_name"
             android:onClick="startOptions"
             android:paddingBottom="25dp"
             android:scaleType="centerInside"
-            android:background="#0000"
-            android:src="@drawable/btn" />
+            android:src="@drawable/btn_par_drawable" />
 
         <ImageButton
             android:id="@+id/imageButtonStory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#0000"
             android:contentDescription="@string/app_name"
             android:onClick="startStory"
             android:scaleType="centerInside"
-            android:background="#0000"
-            android:src="@drawable/btn" />
+            android:src="@drawable/btn_history_drawable" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:src="@drawable/titre" />
 
 </RelativeLayout>

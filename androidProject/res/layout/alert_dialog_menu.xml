@@ -10,7 +10,7 @@
         android:background="#000000"
         android:contentDescription="@string/app_name"
         android:scaleType="centerInside"
-        android:src="@drawable/btn" />
+        android:src="@drawable/btn_menu" />
 
     <TextView
         android:id="@+id/textView1"
