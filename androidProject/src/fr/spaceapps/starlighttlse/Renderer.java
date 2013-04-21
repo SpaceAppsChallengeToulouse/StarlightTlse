@@ -91,7 +91,7 @@ public class Renderer extends RajawaliRenderer {
 		Stack<Number3D> points = new Stack<Number3D>();
 		
 		double step = 2*Math.PI/nbPoints;
-		Number3D firstPoint = new Number3D(center.x + ray, center.y, center.y);
+		Number3D firstPoint = new Number3D(center.x + ray, center.y, center.z);
 		for(double currentAngle = 0; currentAngle < Math.PI*2; currentAngle += step) {
 			double x = Math.cos(currentAngle) * ray + center.x;
 			double y = center.y;//always 0
@@ -190,6 +190,11 @@ public class Renderer extends RajawaliRenderer {
 	
 	public Camera getCamera(){
 		return mCamera;
+	}
+	
+	public void animateTo(Number3D position, Number3D lookAt) {
+		mCamera.setPosition(position);
+		mCamera.setLookAt(lookAt);
 	}
 	
 }

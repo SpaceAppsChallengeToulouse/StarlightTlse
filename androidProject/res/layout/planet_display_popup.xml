@@ -22,12 +22,14 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:text="@string/planet_name"
+            android:textColor="#fff"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7" />
     </LinearLayout>
 
@@ -39,6 +41,7 @@
             android:id="@+id/textView2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".3"
             android:text="@string/mass" 
             android:textStyle="bold" />
@@ -47,6 +50,7 @@
             android:id="@+id/text_mass"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7" />
     </LinearLayout>
 
@@ -58,6 +62,7 @@
             android:id="@+id/textView3"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".3"
             android:text="@string/size" 
             android:textStyle="bold" />
@@ -66,6 +71,7 @@
             android:id="@+id/text_size"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7" />
     </LinearLayout>
 
@@ -77,6 +83,7 @@
             android:id="@+id/textView4"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".3"
             android:text="@string/temperature" 
             android:textStyle="bold" />
@@ -85,6 +92,7 @@
             android:id="@+id/text_temperature"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7"/>
     </LinearLayout>
 
@@ -96,6 +104,7 @@
             android:id="@+id/textView5"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".3"
             android:text="@string/period" 
             android:textStyle="bold" />
@@ -104,6 +113,7 @@
             android:id="@+id/text_period"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7" />
     </LinearLayout>
 
@@ -115,6 +125,7 @@
             android:id="@+id/textView6"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".3"
             android:text="@string/semi_axis" 
             android:textStyle="bold" />
@@ -123,6 +134,7 @@
             android:id="@+id/text_semi_axis"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:layout_weight=".7" />
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package fr.spaceapps.starlighttlse;
 
 import rajawali.Camera;
 import rajawali.RajawaliActivity;
+import rajawali.math.Number3D;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,6 +33,9 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 	private final float TOUCH_SCALE_FACTOR = 180f / 3200;
 
 	private final static String TAG = "Visualisation";
+	
+	int presentationStep = 0;
+	boolean hadSomethingBeenDone = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,41 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 		float x = e.getX();
 		float y = e.getY();
 		switch (e.getAction()) {
+		
+
+		case MotionEvent.ACTION_DOWN:
+			Log.d("DOWN", "DOWN DOWN DOWN");
+			hadSomethingBeenDone = false;
+			break;
+		case MotionEvent.ACTION_UP:
+			Log.d("UP", "UP UP UP");
+			if(!hadSomethingBeenDone) {
+				Log.d("CLICK", "clicked step : "+presentationStep);
+				Planet planet = new Planet();
+				planet.setX(-135.110709072558f);
+				planet.setY(168.755371357685f);
+				planet.setZ(-29.104238134762f);
+				planet.setName("NAME NAME");
+				planet.setSize(12);
+				planet.setDensity(12315);
+				planet.setTemperature(255);
+				planet.setPeriod(555);
+				planet.setSemiAxis(44);
+				switch(presentationStep) {
+				case 0:
+					Number3D cameraPosition = planet.getNumber3D();
+					cameraPosition.add(1, 2, 1);
+					mRenderer.animateTo(cameraPosition, planet.getNumber3D());
+					break;
+				default:
+					displayPlanetDialog(planet);
+					break;
+				}
+				presentationStep++;
+			}
+			break;
 		case MotionEvent.ACTION_MOVE:
+			hadSomethingBeenDone = true;
 			currentlyZooming = e.getPointerCount()>1;
 
 			Camera cam = mRenderer.getCamera();
@@ -132,6 +170,7 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 			//requestRender();
 			break;
 		case MotionEvent.ACTION_POINTER_2_DOWN:
+			hadSomethingBeenDone = true;
 			currentlyZooming = true;
 			float x2 = e.getX(1);
 			float y2 = e.getY(1);
@@ -184,7 +223,8 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setView(inflater.inflate(R.layout.planet_display_popup, null))
+	    View dialogView = inflater.inflate(R.layout.planet_display_popup, null);
+	    builder.setView(dialogView)
 	    // Add action buttons
 	           .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
 	               @Override
@@ -200,22 +240,22 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 	               }
 	           });      
 	    AlertDialog dialog = builder.create();
-	    TextView name = (TextView) dialog.findViewById(R.id.text_name);
+	    TextView name = (TextView) dialogView.findViewById(R.id.text_name);
 	    name.setText(planet.getName());
 	    
-	    TextView mass = (TextView) dialog.findViewById(R.id.text_mass);
+	    TextView mass = (TextView) dialogView.findViewById(R.id.text_mass);
 	    mass.setText(Float.toString(planet.getMass()));
 	    
-	    TextView size = (TextView) dialog.findViewById(R.id.text_size);
+	    TextView size = (TextView) dialogView.findViewById(R.id.text_size);
 	    size.setText(Float.toString(planet.getSize()));
 	    
-	    TextView temperature = (TextView) dialog.findViewById(R.id.text_temperature);
+	    TextView temperature = (TextView) dialogView.findViewById(R.id.text_temperature);
 	    temperature.setText(planet.getTemperature() + "°K");
 	    
-	    TextView period = (TextView) dialog.findViewById(R.id.text_period);
+	    TextView period = (TextView) dialogView.findViewById(R.id.text_period);
 	    period.setText(Float.toString(planet.getPeriod()));
 	    
-	    TextView semiAxis = (TextView) dialog.findViewById(R.id.text_semi_axis);
+	    TextView semiAxis = (TextView) dialogView.findViewById(R.id.text_semi_axis);
 	    semiAxis.setText(Float.toString(planet.getSemiAxis()));
 	    
 	    

@@ -1,5 +1,7 @@
 package fr.spaceapps.starlighttlse.beans;
 
+import rajawali.math.Number3D;
+
 
 public class Planet {
 	
@@ -15,6 +17,9 @@ public class Planet {
 	
 	public Planet(){
 		
+	}
+	public Number3D getNumber3D() {
+		return new Number3D(x,y,z);
 	}
 
 	public String getName() {

@@ -16,6 +16,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+            android:textColor="#fff"
         android:text="@string/planet_scale" />
 
     <SeekBar
@@ -29,6 +30,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+            android:textColor="#fff"
         android:text="@string/star_scale" />
 
     <SeekBar
