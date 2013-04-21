@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import fr.spaceapps.starlighttlse.beans.Planet;
 
 public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 
@@ -172,6 +174,51 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 	               }
 	           });      
 	    AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	private void displayPlanetDialog(Planet planet) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    // Get the layout inflater
+	    LayoutInflater inflater = this.getLayoutInflater();
+
+	    // Inflate and set the layout for the dialog
+	    // Pass null as the parent view because its going in the dialog layout
+	    builder.setView(inflater.inflate(R.layout.planet_display_popup, null))
+	    // Add action buttons
+	           .setPositiveButton(R.string.btn_ok, new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	                   // sign in the user ...
+	               }
+	           })
+	           .setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	                   //LoginDialogFragment.this.getDialog().cancel();
+	            	   //Dialog.this.
+	            	   dialog.cancel();
+	               }
+	           });      
+	    AlertDialog dialog = builder.create();
+	    TextView name = (TextView) dialog.findViewById(R.id.text_name);
+	    name.setText(planet.getName());
+	    
+	    TextView mass = (TextView) dialog.findViewById(R.id.text_mass);
+	    mass.setText(Float.toString(planet.getMass()));
+	    
+	    TextView size = (TextView) dialog.findViewById(R.id.text_size);
+	    size.setText(Float.toString(planet.getSize()));
+	    
+	    TextView temperature = (TextView) dialog.findViewById(R.id.text_temperature);
+	    temperature.setText(planet.getTemperature() + "°K");
+	    
+	    TextView period = (TextView) dialog.findViewById(R.id.text_period);
+	    period.setText(Float.toString(planet.getPeriod()));
+	    
+	    TextView semiAxis = (TextView) dialog.findViewById(R.id.text_semi_axis);
+	    semiAxis.setText(Float.toString(planet.getSemiAxis()));
+	    
+	    
 		dialog.show();
 	}
 

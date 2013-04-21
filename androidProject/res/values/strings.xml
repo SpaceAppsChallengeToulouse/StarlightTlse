@@ -10,5 +10,11 @@
     <string name="star_scale">Stars scale</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
+    <string name="planet_name">Name</string>
+    <string name="mass">Mass</string>
+    <string name="size">Size</string>
+    <string name="temperature">T°</string>
+    <string name="period">Period</string>
+    <string name="semi_axis">Semi Axis</string>
 
 </resources>
