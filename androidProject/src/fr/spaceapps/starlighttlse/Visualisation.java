@@ -121,9 +121,10 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 				float dy = y - mPreviousY;
 
 
-				cam.setRotX(cam.getRotX() + dx * TOUCH_SCALE_FACTOR);
-				cam.setRotY(cam.getRotY() + dy * TOUCH_SCALE_FACTOR);
-
+//				cam.setRotX(cam.getRotX() + dx * TOUCH_SCALE_FACTOR);
+//				cam.setRotY(cam.getRotY() + dy * TOUCH_SCALE_FACTOR);
+				cam.setRotation(cam.getRotation().add(-dy * TOUCH_SCALE_FACTOR,-dx * TOUCH_SCALE_FACTOR,0));
+				
 				Log.d(TAG, "dx = "+dx+" , dy = "+dy);
 			}
 			//requestRender();

@@ -9,6 +9,7 @@ import rajawali.BaseObject3D;
 import rajawali.Camera;
 import rajawali.animation.BezierPath3D;
 import rajawali.lights.DirectionalLight;
+import rajawali.lights.PointLight;
 import rajawali.materials.DiffuseMaterial;
 import rajawali.materials.SimpleMaterial;
 import rajawali.math.Number3D;
@@ -19,10 +20,13 @@ import rajawali.renderer.RajawaliRenderer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class Renderer extends RajawaliRenderer {
 	private DirectionalLight mLight;
 	private BaseObject3D mSphere;
+	private BaseObject3D mMoon;
+	private PointLight mSunLight;
 
 	public Renderer(Context context) {
 		super(context);
@@ -34,16 +38,29 @@ public class Renderer extends RajawaliRenderer {
 		mLight.setColor(1.0f, 1.0f, 1.0f);
 		mLight.setPower(2);
 		
-		Number3D earthCenter = new Number3D(0, 0, 0);
+		mSunLight = new PointLight();
+		mSunLight.setColor(1.0f, 1.0f, 1.0f);
+		mSunLight.setPower(2);
+		mSunLight.setPosition(1.1f, 0, 0);
 		
-		mSphere = getSphere(earthCenter, 1, 20, R.drawable.earthmap_nasa);
-
+		
+		Number3D earthCenter = new Number3D(0, 0, 0);
+		Number3D moonCenter = new Number3D(1.5f, 0, 0);
+		
+		mSphere = getSphere(earthCenter, 1, 20, R.drawable.sun);
+		mMoon   = getSphere(moonCenter, 0.125f, 20, R.drawable.earthmap_nasa);
+		
 		addChild(mSphere);
+		addChild(mMoon);
 		
 		Line3D line = getCircle(earthCenter, earthCenter, 1.5, 75, 1, 0xffffff00);
 		addChild(line);
 		
 		mCamera.setZ(4.2f);
+		mCamera.setY(2.0f);
+		//mCamera.setLookAt(0, 0, 0);
+		mCamera.setFarPlane(Float.MAX_VALUE);
+		Log.i("init cam","far plane :"+mCamera.getFarPlane());
 	}
 
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -54,7 +71,7 @@ public class Renderer extends RajawaliRenderer {
 
 	public void onDrawFrame(GL10 glUnused) {
 		super.onDrawFrame(glUnused);
-		mSphere.setRotY(mSphere.getRotY() + 1);
+		mMoon.setRotY(mMoon.getRotY() + 1);
 	}
 	
 	private Line3D getCircle(Number3D center, Number3D earthPosition, double ray, int nbPoints, float thickness, int color) {
@@ -99,6 +116,7 @@ public class Renderer extends RajawaliRenderer {
 		Sphere sphere = new Sphere(ray, nbPoint, nbPoint);
 		sphere.setMaterial(material);
 		sphere.addLight(mLight);
+		sphere.addLight(mSunLight);
 		sphere.addTexture(mTextureManager.addTexture(bg));
 		
 		sphere.setPosition(center);
