@@ -94,6 +94,7 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 				}
 			}else{
 				Log.i("onTouchEvent"," not zooming");
+				//dx and dy according to the screen referential, they need to be translated to dx, dy and dz in the referential of the world
 				float dx = x - mPreviousX;
 				float dy = y - mPreviousY;
 				
