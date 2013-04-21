@@ -29,7 +29,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public class Renderer extends RajawaliRenderer {
-	private DirectionalLight mLight;
+	private DirectionalLight mLight,mLight2,mLight3;
 	private BaseObject3D mSphere;
 	private BaseObject3D mMoon;
 	private PointLight mSunLight;
@@ -48,15 +48,21 @@ public class Renderer extends RajawaliRenderer {
 		mLight = new DirectionalLight(1f, 0.2f, -1.0f); // set the direction
 		mLight.setColor(1.0f, 1.0f, 1.0f);
 		mLight.setPower(2);
+		mLight2 = new DirectionalLight(1f, 0.2f, -1.0f); // set the direction
+		mLight2.setColor(1.0f, 1.0f, 1.0f);
+		mLight2.setPower(2);
+		mLight3 = new DirectionalLight(0f, 1f, 0f); // set the direction
+		mLight3.setColor(1.0f, 1.0f, 1.0f);
+		mLight3.setPower(2);
 		
 		mSunLight = new PointLight();
 		mSunLight.setColor(1.0f, 1.0f, 1.0f);
 		mSunLight.setPower(2);
-		mSunLight.setPosition(1.1f, 0, 0);
+		mSunLight.setPosition(1.3f, 0, 0);
 		
 		
 		Number3D earthCenter = new Number3D(0, 0, 0);
-		Number3D moonCenter = new Number3D(1.5f, 0, 0);
+		Number3D moonCenter = new Number3D(1.5f*0.866f, 0, 0.75f);
 		
 		mSphere = getSphere(earthCenter, 1, 20, R.drawable.sun);
 		mMoon   = getSphere(moonCenter, 0.125f, 20, R.drawable.earthmap_nasa);
@@ -129,6 +135,8 @@ public class Renderer extends RajawaliRenderer {
 		Sphere sphere = new Sphere(ray, nbPoint, nbPoint);
 		sphere.setMaterial(material);
 		sphere.addLight(mLight);
+		sphere.addLight(mLight2);
+		sphere.addLight(mLight3);
 		sphere.addLight(mSunLight);
 		sphere.addTexture(mTextureManager.addTexture(bg));
 		
@@ -148,21 +156,55 @@ public class Renderer extends RajawaliRenderer {
 		planet1.setX(-133.110709072558f);
 		planet1.setY(168.755371357685f);
 		planet1.setZ(-29.104238134762f);
+		planet1.setName("TrES-2 Kepler 1b");
+		planet1.setSize(14.26f);
+		planet1.setDensity(12315);
+		planet1.setTemperature(255);
+		planet1.setPeriod(2.470614f);
+		planet1.setSemiAxis(0.03556f);
 		
 		planet2 = new Planet();
 		planet2.setX(-135.110709072558f);
 		planet2.setY(168.755371357685f);
 		planet2.setZ(-29.104238134762f);
+		planet2.setName("HAT-P-7b Kepler 2b");
+		planet2.setSize(5.26f);
+		planet2.setDensity(12315);
+		planet2.setTemperature(3160);
+		planet2.setPeriod(2.2047298f);
+		planet2.setSemiAxis(0.0379f);
 		
 		star1 = new Star();
 		star1.setX(-138.110709072558f);
 		star1.setY(168.755371357685f);
 		star1.setZ(-29.104238134762f);
+		star1.setSize(0.5f);
 		star1.setPlan(new ArrayList<Planet>());
 		star1.getPlan().add(planet1);
 		star1.getPlan().add(planet2);
 		
+		planet3 = new Planet();
+		planet3.setX(173.047652021754f);
+		planet3.setY(-207.778635401528f);
+		planet3.setZ(-174.102942860158f);
+		planet3.setName("HAT-P-11b Kepler 3b");
+		planet3.setSize(5.0f);
+		planet3.setDensity(12315);
+		planet3.setTemperature(3160);
+		planet3.setPeriod(4.8878048f);
+		planet3.setSemiAxis(0.053f);
+
+		star2 = new Star();
+		star2.setX(170.047652021754f);
+		star2.setY(-207.778635401528f);
+		star2.setZ(-174.102942860158f);
+		star2.setSize(1.5f);
+		star2.setPlan(new ArrayList<Planet>());
+		star2.getPlan().add(planet3);
+		
+
 		universe.add(star1);
+		universe.add(star2);
 		mStars = new ArrayList<BaseObject3D>();
 		mPlanets = new ArrayList<BaseObject3D>();
 }
@@ -172,15 +214,17 @@ public class Renderer extends RajawaliRenderer {
 		for(Star aStar : universe){
 
 			Number3D starCenter = new Number3D(aStar.getX(), aStar.getY(), aStar.getZ());
-			BaseObject3D starObj = getSphere(starCenter, 1, 20, R.drawable.sun);
+			BaseObject3D starObj = getSphere(starCenter, 1*aStar.getSize(), 20, R.drawable.sun);
 			addChild(starObj);
 			
 			
 			for(Planet aPlanet : aStar.getPlan()){
 				Number3D planetCenter = new Number3D(aPlanet.getX(), aPlanet.getY(), aPlanet.getZ());
-				BaseObject3D planetObj  = getSphere(planetCenter, 0.125f, 20, R.drawable.earthmap_nasa);
+				BaseObject3D planetObj  = getSphere(planetCenter, 0.0125f*aPlanet.getSize(), 20, R.drawable.planet_wight);
 				
 				addChild(planetObj);
+				
+				planetObj.setRotY((float) (Math.random() * 360));// to vary texture orientation
 				
 				Line3D line = getCircle(starCenter, starCenter, planetCenter.x-starCenter.x, 75, 1, 0xffffff00);
 				addChild(line);
@@ -195,6 +239,10 @@ public class Renderer extends RajawaliRenderer {
 	public void animateTo(Number3D position, Number3D lookAt) {
 		mCamera.setPosition(position);
 		mCamera.setLookAt(lookAt);
+	}
+	
+	public List<Star> getUniverse() {
+		return universe;
 	}
 	
 }

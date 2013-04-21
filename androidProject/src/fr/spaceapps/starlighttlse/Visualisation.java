@@ -85,24 +85,26 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 			Log.d("UP", "UP UP UP");
 			if(!hadSomethingBeenDone) {
 				Log.d("CLICK", "clicked step : "+presentationStep);
-				Planet planet = new Planet();
-				planet.setX(-135.110709072558f);
-				planet.setY(168.755371357685f);
-				planet.setZ(-29.104238134762f);
-				planet.setName("NAME NAME");
-				planet.setSize(12);
-				planet.setDensity(12315);
-				planet.setTemperature(255);
-				planet.setPeriod(555);
-				planet.setSemiAxis(44);
+				Planet planet = mRenderer.getUniverse().get(0).getPlan().get(0);
+				Planet planet2 = mRenderer.getUniverse().get(1).getPlan().get(0);
 				switch(presentationStep) {
 				case 0:
+					
 					Number3D cameraPosition = planet.getNumber3D();
 					cameraPosition.add(1, 2, 1);
 					mRenderer.animateTo(cameraPosition, planet.getNumber3D());
 					break;
-				default:
+				case 1:
 					displayPlanetDialog(planet);
+					break;
+				case 2:
+
+					Number3D cameraPosition2 = planet2.getNumber3D();
+					cameraPosition2.add(1, 2, 1);
+					mRenderer.animateTo(cameraPosition2, planet2.getNumber3D());
+					break;
+				default:
+					displayPlanetDialog(planet2);
 					break;
 				}
 				presentationStep++;
