@@ -27,7 +27,7 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 
 	private float mPreviousY;
 	private final float TRACKBALL_SCALE_FACTOR = 36.0f;
-	private final float TOUCH_SCALE_FACTOR = 180f / 320;
+	private final float TOUCH_SCALE_FACTOR = 180f / 3200;
 
 	private final static String TAG = "Visualisation";
 
