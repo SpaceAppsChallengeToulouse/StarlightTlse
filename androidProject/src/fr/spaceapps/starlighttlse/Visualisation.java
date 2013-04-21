@@ -2,13 +2,16 @@ package fr.spaceapps.starlighttlse;
 
 import rajawali.Camera;
 import rajawali.RajawaliActivity;
-import rajawali.math.Quaternion;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 
 public class Visualisation extends RajawaliActivity  implements OnTouchListener{
 
@@ -32,6 +35,23 @@ public class Visualisation extends RajawaliActivity  implements OnTouchListener{
         mRenderer = new Renderer(this);
         mRenderer.setSurfaceView(mSurfaceView);
         mSurfaceView.setOnTouchListener(this);
+        
+        LayoutInflater i = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //CheckedTextView c = (CheckedTextView)i.inflate(R.layout.friend, null);
+        View inflate = i.inflate(R.layout.activity_visualisation, null);
+
+
+        mLayout.addView(inflate);
+        
+        
+        Button btn = (Button)findViewById(R.id.menuButton);
+        btn.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				Log.d(TAG, "BUTTON CLICKED");
+			}});
+        
         super.setRenderer(mRenderer);
 	}
 
