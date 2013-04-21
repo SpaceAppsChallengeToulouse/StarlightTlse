@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -11,7 +13,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startVisualisationActivity();
+        //startVisualisationActivity();
     }
 
 
@@ -26,5 +28,21 @@ public class MainActivity extends Activity {
         
         startActivity(intent);
         finish();
+    }
+    
+    
+    //Buttons
+    public void startGame(View v) {
+    	startVisualisationActivity();
+    }
+    public void startOptions(View v) {
+    	int duration = Toast.LENGTH_SHORT;
+    	Toast toast = Toast.makeText(this, R.string.not_implemented, duration);
+    	toast.show();
+    }
+    public void startStory(View v) {
+    	int duration = Toast.LENGTH_SHORT;
+    	Toast toast = Toast.makeText(this, R.string.not_implemented, duration);
+    	toast.show();
     }
 }
