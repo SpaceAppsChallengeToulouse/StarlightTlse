@@ -1,0 +1,124 @@
+@font-face {
+  font-family: 'hk-demo';
+  src: url('fonts/hk-demo.eot');
+  src: url('fonts/hk-demo.eot#iefix') format('embedded-opentype'),
+       url('fonts/hk-demo.woff') format('woff'),
+       url('fonts/hk-demo.ttf') format('truetype'),
+       url('fonts/hk-demo.svg#hk-demo') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.demo-wrapper {
+	background-color: #000;
+}
+.demo-wrapper .header {
+	text-align: center;
+	line-height: 55px;
+	width: 100%;
+	height: 50px;
+	background-color: #D35400;
+	color: #fff;
+	text-shadow: 0 0 0 rgba(255,255,255,0);
+	position: relative;
+}
+.demo-wrapper .header .title { 
+	font-family: 'Georgia';
+}
+.demo-wrapper .header a,
+.demo-wrapper .header a:hover,
+.demo-wrapper .header a:active { 
+	color: #fff !important;
+	text-decoration: none;
+	font-family: 'hk-demo';
+	background-color: rgba(0,0,0,0);
+	font-size: 17px;
+	font-weight: normal;
+}
+.demo-wrapper .open a,
+.demo-wrapper .open a:hover {
+	padding: 7px 15px;
+	background-color: #000;
+	border-radius: 3px;
+}
+.demo-wrapper .header .open { 
+	color: #fff;
+	position: absolute;
+}
+.demo-wrapper .header .open.left {
+	left: 20px;
+	cursor: pointer;
+}
+.demo-wrapper .header .open.right {
+	right: 20px;
+	cursor: pointer;
+}
+.demo-wrapper .panel {
+	background: #7F8C8D;
+	color: #ECF0F1;
+}
+.demo-wrapper .panel a {
+	color: #FFF !important;
+	text-shadow: 0 0 0 rgba(0,0,0,0);
+	font-size: 14px;
+	padding: 15px 20px 15px 60px;
+	display: block;
+	text-decoration: none;
+	border-bottom: 1px solid #475657;
+	border-top: 1px solid #95A5A6;
+	position: relative;
+	font-weight: 400;
+}
+.demo-wrapper .panel ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border-bottom: 1px solid #95A5A6;
+}
+.demo-wrapper .panel .avatar {
+	position: absolute;
+	top: 8px;
+	left: 20px;
+}
+.demo-wrapper .ui-panel-inner {
+	padding: 0;
+}
+.demo-wrapper .panel a:hover {
+	background-color: #95A5A6;
+}
+.demo-wrapper .panel.right a:before {
+	content: '';
+	display: block;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	position: absolute;
+	background-color: #2ECC71;
+	right: 20px;
+}
+.demo-wrapper .panel.left a:before {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 15px;
+	left: 20px;
+	font-family: 'hk-demo';
+	text-align: center;
+	font-size: 18px;
+}
+.demo-wrapper .panel.left .newsfeed a:before { 
+	content: '\f09e';
+}
+.demo-wrapper .panel.left .profile a:before { 
+	content: '👤';
+}
+.demo-wrapper .panel.left .setting a:before { 
+	content: '\2699';
+}
+.demo-wrapper .panel.left .logout a:before { 
+	content: '\e78e';
+}
+.demo-wrapper .panel.left .report a:before { 
+	content: '\f0e0';
+}
