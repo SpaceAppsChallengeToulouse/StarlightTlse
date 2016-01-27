@@ -10,17 +10,125 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile.js"></script>
+
+<script type="text/javascript" src="cordova.js"></script>
 <script>
+ var logOb;
 $( document ).ready(function() {
+	document.addEventListener('deviceready', onDeviceReady, false);
+	/*window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+		//console.log("got main dir",dir);
+		dir.getFile("log.txt", {create:true}, function(file) {
+			//console.log("got the file", file);
+			logOb = file;
+			writeLog("App started");			
+		});
+	});*/
  
-    $( "p" ).click(function( event ) {
- 
-        alert( "Thanks for visiting!" );
- 
-    });
- 
-    alert( "initialization just finished" );
+    alert( "initialization just finished " );
 });
+function onDeviceReady() {
+
+	window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+		//console.log("got main dir",dir);
+		dir.getFile("log.txt", {create:true}, function(file) {
+			//console.log("got the file", file);
+			logOb = file;
+			writeLog("App started");			
+		});
+	});
+	
+    alert( "initialization is ready "+cordova.file.dataDirectory );
+}
+function mofifyContent(data){
+
+    alert( $(".title").html());
+ $(".demo-wrapper").html(getOriginalContent()).trigger('create');
+ //refreshPage();
+    alert( $(".title").html());
+	writeLog("content changed");
+}
+
+function getOriginalContent(){
+	return '<div class="panel left" data-role="panel" data-position="left" data-display="push" id="panel-01">'+
+           ' <ul>'+
+            '    <li class="newsfeed"><a href="#" title="Home">News Feed</a></li>'+
+            '    <li class="profile"><a href="#" title="Profile">Profile</a></li>'+
+            '    <li class="setting"><a href="#" title="Setting">Setting</a></li>'+
+            '    <li class="logout"><a href="#" title="Logout">Logout</a></li>'+
+            '</ul>'+
+        '</div>'+
+		'<div class="header" data-role="header">'+
+		'	<span class="open left"><a href="#panel-01">&#61641;</a></span>'+
+        '    <span class="title">Hello World</span>'+
+		'	<span class="open right"><a href="#panel-02">&#9776;</a></span>'+
+		'</div>'+
+        '<div class="content" data-role="content">'+
+        '    <h3>This is the content</h3>'+
+        '    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'+
+        '    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,'+
+        '    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo'+
+        '    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse'+
+        '    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non'+
+        '    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>'+
+        '</div>'+
+    	'<div class="panel right" data-role="panel" data-position="right" data-display="overlay" id="panel-02">'+
+        '	<ul>'+
+        '		<li><a href="#" title="John Doe"><span class="avatar"><img src="img/mambows_120.jpg" width="30" height="30" onclick="mofifyContent(\'John Doe\')"></span>John Doe</a></li>'+
+    '    		<li><a href="#" title="Jessy Doe"><span class="avatar"><img src="img/mkalalang_120.jpg" width="30" height="30" onclick="mofifyContent(\'Jessy Jones\')"></span>Jessy Jones</a></li>'+
+    '    	</ul>'+
+    '	</div>';
+	
+}
+
+function refreshPage()
+{
+    jQuery.mobile.changePage(window.location.href, {
+        allowSamePageTransition: true,
+        transition: 'none',
+        reloadPage: false
+    });
+}
+
+
+
+function fail(e) {
+
+		alert("FileSystem Error");
+	//console.log("FileSystem Error");
+	//console.dir(e);
+}
+
+
+function writeLog(str) {
+	if(!logOb) return;
+	var log = str + " [" + (new Date()) + "]\n";
+	//console.log("going to log "+log);
+	logOb.createWriter(function(fileWriter) {
+		
+		fileWriter.seek(fileWriter.length);
+		
+		var blob = new Blob([log], {type:'text/plain'});
+		fileWriter.write(blob);
+		//console.log("ok, in theory i worked");
+		alert("ok, in theory i worked");
+	}, fail);
+}
+
+function justForTesting() {
+	logOb.file(function(file) {
+		var reader = new FileReader();
+
+		reader.onloadend = function(e) {
+			//console.log(this.result);
+			$('#fileContent').html(this.result);
+			alert("file content"+this.result);
+		};
+
+		reader.readAsText(file);
+	}, fail);
+
+}
 </script>
 </head>
 
@@ -29,23 +137,24 @@ $( document ).ready(function() {
         <!-- panel 01 -->
         <div class="panel left" data-role="panel" data-position="left" data-display="push" id="panel-01">
             <ul>
-                <li class="newsfeed"><a href="#" title="Home">News Feed</a></li>
+                <li class="newsfeed"><a href="#" title="Home">Niouzes</a></li>
                 <li class="profile"><a href="#" title="Profile">Profile</a></li>
-                <li class="setting"><a href="#" title="Setting">Setting</a></li>
-                <li class="logout"><a href="#" title="Logout">Logout</a></li>
-                <li class="report"><a href="#" title="Report">Report Bug</a></li>
+                <li class="setting"><a href="#" title="Setting">Réglages</a></li>
+                <li class="logout"><a href="#" title="Logout">Déconnection</a></li>
+                <li class="report"><a href="#" title="Report">Rapporter Bug</a></li>
             </ul>
         </div>
 		<div class="header" data-role="header">
 			<span class="open left"><a href="#panel-01">&#61641;</a></span>
-            <span class="title">Hello World</span>
+            <span class="title">Bonjour Monde</span>
 			<span class="open right"><a href="#panel-02">&#9776;</a></span>
 		</div>
         <div class="content" data-role="content">
-            <h3>This is the content</h3>
+            <h3 onclick="mofifyContent('John Doe')" >This is the content à traduire</h3>
+			<div id="fileContent"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            tempor <b onclick="writeLog('pressed B');">incididunt</b> ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud <u onclick="justForTesting();">exercitation</u> ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -53,8 +162,8 @@ $( document ).ready(function() {
     	<!-- panel 02 -->
     	<div class="panel right" data-role="panel" data-position="right" data-display="overlay" id="panel-02">
         	<ul>
-        		<li><a href="#" title="John Doe"><span class="avatar"><img src="img/mambows_120.jpg" width="30" height="30"></span>John Doe</a></li>
-        		<li><a href="#" title="Jessy Doe"><span class="avatar"><img src="img/mkalalang_120.jpg" width="30" height="30"></span>Jessy Doe</a></li>
+        		<li><a href="#" title="John Doe"><span class="avatar"><img src="img/mambows_120.jpg" width="30" height="30" ></span>Inconnu soldat</a></li>
+        		<li><a href="#" title="Jessy Doe"><span class="avatar"><img src="img/mkalalang_120.jpg" width="30" height="30"></span>Jessica Jones</a></li>
         	</ul>
     	</div>
 	</div>
